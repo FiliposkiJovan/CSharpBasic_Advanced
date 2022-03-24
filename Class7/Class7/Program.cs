@@ -7,8 +7,6 @@ namespace Class7
         static void Main(string[] args)
         {
 
-        }
-        
-            
+        }   
     }
 }

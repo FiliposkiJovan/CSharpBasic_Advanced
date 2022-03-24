@@ -12,6 +12,13 @@ namespace Class7.Entities
 
         public string LastName { get; set; }
 
+        
+
+        public Employee( int id, string firstName, string lastName,)
+        {
+
+        }
 
     }
+    
 }
