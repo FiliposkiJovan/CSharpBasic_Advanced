@@ -38,9 +38,9 @@ namespace Class9
             try
             {
                 Cinema cineplexx = new Cinema("Cineplessm", new List<string>() { "Hall 7", "Hall 3", "Hall 4" },
-                                         new List<Movie>() { new Movie ("Batman", Genre.Action, 7),
-                                                            new Movie("Lost City", Genre.Action, 10),
-                                                            new Movie("Morbius", Genre.Comedy, 0) });
+                                         new List<Movie>() {new Movie ("Batman", Genre.Action, 7),
+                                                            new Movie ("Lost City", Genre.Action, 10),
+                                                            new Movie ("Morbius", Genre.Comedy, 0) });
             }
             catch (InvalidRatingExeption exception)
             {
