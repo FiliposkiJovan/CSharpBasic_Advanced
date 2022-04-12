@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class02_Static_classes_polymorphism", "Class02_Static_classes_polymorphism\Class02_Static_classes_polymorphism.csproj", "{C9261606-CEFA-4A6B-92A3-4F64A297D697}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise01", "Exercise01\Exercise01.csproj", "{968E45BC-8CE2-4530-9D99-8E560AA18559}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9261606-CEFA-4A6B-92A3-4F64A297D697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9261606-CEFA-4A6B-92A3-4F64A297D697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9261606-CEFA-4A6B-92A3-4F64A297D697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9261606-CEFA-4A6B-92A3-4F64A297D697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{968E45BC-8CE2-4530-9D99-8E560AA18559}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{968E45BC-8CE2-4530-9D99-8E560AA18559}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{968E45BC-8CE2-4530-9D99-8E560AA18559}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{968E45BC-8CE2-4530-9D99-8E560AA18559}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB2801B5-EB51-472C-A6F8-2EC3884D317D}
+	EndGlobalSection
+EndGlobal
