@@ -26,6 +26,11 @@ namespace TaxiManager9000.DataAccess
                                                  user.Password == password);
         }
 
+         public User GetByUserName(string username)
+        {
+            return _users.FirstOrDefault(user => user.UserName == username);
+        }
+
         private User AutoIncrementId(User user)
         {
             int currentId = 0;
@@ -49,6 +54,11 @@ namespace TaxiManager9000.DataAccess
                 AutoIncrementId(new User("test2", "test", Domain.Enums.Role.Maintainance)),
                 AutoIncrementId(new User("test3", "test", Domain.Enums.Role.Administrator))
             });
+        }
+
+        public void Remove(User user)
+        {
+            _users.Remove(user);
         }
     }
 }

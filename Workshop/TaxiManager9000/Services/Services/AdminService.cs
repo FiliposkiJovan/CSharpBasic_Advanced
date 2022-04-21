@@ -1,5 +1,7 @@
 ﻿using TaxiManager9000.DataAccess.Interface;
 using TaxiManager9000.Domain.Entities;
+using TaxiManager9000.Domain.Enums;
+using TaxiManager9000.Domain.Exceptions;
 using TaxiManager9000.Shared;
 
 namespace TaxiManager9000.Services.Services.Interfaces
@@ -13,25 +15,28 @@ namespace TaxiManager9000.Services.Services.Interfaces
             _database = DepencyResolver.GetService<IUserDatabase>();
         }
 
-        public void CreateUser(User user)
+        public void CreateUser(string username, string password, Role role)
         {
-            if (user == null)
+
+            if (string.IsNullOrEmpty(username))
             {
                 throw new ArgumentNullException("Username is empty");
             }
 
-            if (user.UserName.Length <= 5)
+            if (username.Length <= 5)
             {
 
                 throw new ArgumentNullException("Username is shorter then 5 characters");
             } 
 
-            if (user.Password.Length <= 5)
+            if (password.Length <= 5)
             {
                 throw new ArgumentNullException("Password is shorter then 5 characters");
             }
 
-            User currentUser = _database.GetByUserNameAndPassword(user.UserName, user.Password);
+            User user = new User(username, password, role);
+
+            User currentUser = _database.GetByUserNameAndPassword(username, password);
 
             if (currentUser != null)
             {
@@ -41,9 +46,16 @@ namespace TaxiManager9000.Services.Services.Interfaces
             _database.Insert(user);
         }
 
-        public void TerminateUser(User user)
+        public void TerminateUser(string username)
         {
+            User existingUser = _database.GetByUserName(username);
 
+            if (existingUser == null)
+            {
+                throw new NotFoundException("User not found");
+            }
+
+            _database.Remove(existingUser);
         }
     }
 }
