@@ -13,5 +13,10 @@ namespace TaxiManager9000.Services.Services.Interfaces
         void CreateUser(string username ,string password ,Role role);
 
         void TerminateUser(string username);
+
+        void ChangePassword(string userName, string password, string newPassword);
+
+
+        List<User> ListAllUsers();
     }
 }

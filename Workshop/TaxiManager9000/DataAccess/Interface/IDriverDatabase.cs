@@ -7,10 +7,8 @@ using TaxiManager9000.Domain.Entities;
 
 namespace TaxiManager9000.DataAccess.Interface
 {
-    public interface IUserDatabase : IDatabase<User>
+    public interface IDriverDatabase : IDatabase<Driver>
     {
-        User GetByUserNameAndPassword(string username, string password);
-        User GetByUserName(string userName);
-    }
 
+    }
 }

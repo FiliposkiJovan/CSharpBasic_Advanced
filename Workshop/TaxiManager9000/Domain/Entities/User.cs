@@ -2,9 +2,11 @@
 
 namespace TaxiManager9000.Domain.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        public int Id { get; set; }
+        private const int USERNAME_MIN_LENGTH = 5;
+
+        private const int PASSWORD_MIN_LENGTH = 5;
 
         public string UserName { get; set; }
     
@@ -18,12 +20,37 @@ namespace TaxiManager9000.Domain.Entities
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <param name="role"></param>
-        public User(string userName, string password, Role role)
+        public User(string userName, string password, Role role) : base()
         {
-            Id = -1;
+            if (userName.Length < USERNAME_MIN_LENGTH)
+            {
+                throw new ArgumentException($"The username must be longer than {USERNAME_MIN_LENGTH} charracters");
+            }
+
+            ValidatePassword(password);
+
             UserName = userName;
             Password = password;
             Role = role;
+        }
+        public void SetPassword(string password)
+        {
+            ValidatePassword(password);
+
+            Password = password;
+        }
+
+        private static void ValidatePassword(string password)
+        {
+            if (password.Length < PASSWORD_MIN_LENGTH)
+            {
+                throw new ArgumentOutOfRangeException($"The password must be longer than {PASSWORD_MIN_LENGTH} charracters");
+            }
+
+            if (!password.Any(char.IsDigit))
+            {
+                throw new ArgumentOutOfRangeException($"The password must contain at least one number");
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using TaxiManager9000.Domain.Entities;
 
 namespace TaxiManager9000.DataAccess
 {
-    public class UserDatabase : IUserDatabase
+    public class UserDatabase : Database<User>, IUserDatabase
     {
         private readonly List<User> _users;
 
@@ -49,10 +49,10 @@ namespace TaxiManager9000.DataAccess
         {
             _users.AddRange(new List<User>()
             {
-                AutoIncrementId(new User("test", "test", Domain.Enums.Role.Administrator)),
-                AutoIncrementId(new User("test1", "test", Domain.Enums.Role.Manager)),
-                AutoIncrementId(new User("test2", "test", Domain.Enums.Role.Maintainance)),
-                AutoIncrementId(new User("test3", "test", Domain.Enums.Role.Administrator))
+                AutoIncrementId(new User("test69", "test69", Domain.Enums.Role.Administrator)),
+                AutoIncrementId(new User("test1", "test1", Domain.Enums.Role.Manager)),
+                AutoIncrementId(new User("test2", "test2", Domain.Enums.Role.Maintainance)),
+                AutoIncrementId(new User("test3", "test3", Domain.Enums.Role.Administrator))
             });
         }
 

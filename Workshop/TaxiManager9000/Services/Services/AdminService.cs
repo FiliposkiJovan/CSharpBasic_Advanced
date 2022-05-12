@@ -2,9 +2,10 @@
 using TaxiManager9000.Domain.Entities;
 using TaxiManager9000.Domain.Enums;
 using TaxiManager9000.Domain.Exceptions;
+using TaxiManager9000.Services.Services.Interfaces;
 using TaxiManager9000.Shared;
 
-namespace TaxiManager9000.Services.Services.Interfaces
+namespace TaxiManager9000.Services
 {
     public class AdminService : IAdminService
     {
@@ -56,6 +57,25 @@ namespace TaxiManager9000.Services.Services.Interfaces
             }
 
             _database.Remove(existingUser);
+        }
+
+        public void ChangePassword(string username, string password, string newPassword)
+        {
+            User existingUser = _database.GetByUserNameAndPassword(username, password);
+            
+            if(existingUser == null)
+            {
+                throw new NotFoundException($"The user {username} does not exist");
+            }
+            existingUser.SetPassword(newPassword);
+            _database.Update(existingUser);
+        }
+
+        public List<User> ListAllUsers()
+        {
+            List<User> users = _database.GetAll();
+
+            return users;
         }
     }
 }
