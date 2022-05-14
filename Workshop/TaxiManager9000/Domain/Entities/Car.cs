@@ -33,7 +33,7 @@ namespace TaxiManager9000.Domain.Entities
             AssignedDrivers = assignedDriver;
         }
 
-        public decimal GetShigtPercentageUtilization()
+        public decimal GetShiftPercentageUtilization()
         {
             int anyMorningShiftDrivers = AssignedDrivers.Any(x => x.Shift == Enums.Shift.Morning) ? 1 : 0;
             int anyAfternoonShiftDrivers = AssignedDrivers.Any(x => x.Shift == Enums.Shift.Afternoon) ? 1 : 0;

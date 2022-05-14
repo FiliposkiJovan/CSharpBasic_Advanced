@@ -24,6 +24,29 @@ void StartApplication(IAuthService authService, IAdminService adminService, IMai
     ShowMenu(authService, adminService, maintainanceService);
 }
 
+void ShowLogin(IAuthService authService)
+{
+    Console.WriteLine("Enter username");
+    string username = Console.ReadLine();
+
+    Console.WriteLine("Enter password");
+    string password = Console.ReadLine();
+
+    User currentUser;
+    try
+    {
+        authService.LogIn(username, password);
+
+        ConsoleUtils.WriteLineInColor($"Successful login! Welcome {authService.CurrentUser.Role} {authService.CurrentUser.UserName}",
+                                      ConsoleColor.Green);
+    }
+    catch (InvalidCredentialsException ex)
+    {
+        ConsoleUtils.WriteLineInColor(ex.Message, ConsoleColor.Red); ;
+        ConsoleUtils.WriteLineInColor("Unsuccessful login, try again", ConsoleColor.Red);
+    }
+}
+
 void ShowMenu(IAuthService authService, IAdminService adminService, IMaintainanceService maintainanceService)
 {
     switch (authService.CurrentUser.Role)
@@ -97,33 +120,56 @@ void ShowAdminMenu(IAdminService adminService)
 
 void ShowMaintainenceMenu(IMaintainanceService maintainanceService)
 {
-    throw new NotImplementedException();
+    Console.WriteLine($"{MaintainanceMenuOptions.LIST_ALL_CARS} List All Car \n {MaintainanceMenuOptions.LICENSE_PLATE_STATUS} License plate status");
+    string input = Console.ReadLine();
+
+    switch (input)
+    {
+        case MaintainanceMenuOptions.LIST_ALL_CARS:
+            {
+                List<Car> cars = maintainanceService.ListAllCars();
+                foreach (Car car in cars)
+                {
+                    Console.WriteLine($"{car.Id}{car.Model} Car model with License plate {car.LicensePlate} and utilized {car.GetShiftPercentageUtilization().ToString("0.##")}");
+                }
+                break;
+            }
+         case MaintainanceMenuOptions.LICENSE_PLATE_STATUS:
+                {
+                List<Car> cars = maintainanceService.ListAllCars();
+                foreach (Car car in cars)
+                {
+                    if(car.LicensePlateExpiryDate < DateTime.Now)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"{car.Id} Car with License plate {car.LicensePlate} expiering on {car.LicensePlateExpiryDate}");
+                        Console.ResetColor();
+                    }
+                    else if(car.LicensePlateExpiryDate >= DateTime.Now)
+                    {
+                        if(car.LicensePlateExpiryDate <= DateTime.Now.AddMonths(3))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine($"{car.Id} Car with License plate {car.LicensePlate} expiering on {car.LicensePlateExpiryDate}");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"{car.Id} Car with License plate {car.LicensePlate} expiering on {car.LicensePlateExpiryDate}");
+                            Console.ResetColor();
+                        }
+                    }
+                }
+                break;
+                }
+        default:
+            throw new ArgumentOutOfRangeException("Invalid input");
+    
+    }
 }
 
 void ShowManagerMenu(IAuthService authService)
 {
     throw new NotImplementedException();
-}
-
-void ShowLogin(IAuthService authService)
-{
-    Console.WriteLine("Enter username");
-    string username = Console.ReadLine();
-
-    Console.WriteLine("Enter password");
-    string password = Console.ReadLine();
-
-    User currentUser;
-    try
-    {
-        authService.LogIn(username, password);
-
-        ConsoleUtils.WriteLineInColor($"Successful login! Welcome {authService.CurrentUser.Role} {authService.CurrentUser.UserName}",
-                                      ConsoleColor.Green);
-    }
-    catch (InvalidCredentialsException ex)
-    {
-        ConsoleUtils.WriteLineInColor(ex.Message, ConsoleColor.Red); ;
-        ConsoleUtils.WriteLineInColor("Unsuccessful login, try again", ConsoleColor.Red);
-    }
 }
